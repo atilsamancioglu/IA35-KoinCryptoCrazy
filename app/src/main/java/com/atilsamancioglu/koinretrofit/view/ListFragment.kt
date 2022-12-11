@@ -27,16 +27,15 @@ class ListFragment : Fragment(),RecyclerViewAdapter.Listener {
     private lateinit var viewModel : CryptoViewModel
     private var cryptoAdapter = RecyclerViewAdapter(arrayListOf(),this)
 
-
-    //private val BASE_URL = "https://raw.githubusercontent.com/"
+/*
+    private val BASE_URL = "https://raw.githubusercontent.com/"
     private var cryptoModels: ArrayList<CryptoModel>? = null
     private var recyclerViewAdapter : RecyclerViewAdapter? = null
-    //private var job : Job? = null
-/*
+    private var job : Job? = null
+
     val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         println("Error: ${throwable.localizedMessage}")
     }
-
  */
 
     override fun onCreate(savedInstanceState: Bundle?) {
