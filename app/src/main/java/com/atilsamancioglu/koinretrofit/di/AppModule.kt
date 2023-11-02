@@ -3,40 +3,31 @@ package com.atilsamancioglu.koinretrofit.di
 import com.atilsamancioglu.koinretrofit.repository.CryptoDownload
 import com.atilsamancioglu.koinretrofit.repository.CryptoDownloadImpl
 import com.atilsamancioglu.koinretrofit.service.CryptoAPI
-import com.atilsamancioglu.koinretrofit.viewmodel.CryptoViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import com.atilsamancioglu.koinretrofit.util.Constants.BASE_URL
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
-val appModule  = module {
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
 
-    //creates a singleton
-    single {
-        val BASE_URL = "https://raw.githubusercontent.com/"
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
+    @Singleton
+    @Provides
+    fun injectRetrofitAPI() : CryptoAPI {
+        return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(CryptoAPI::class.java)
+            .baseUrl(BASE_URL).build().create(CryptoAPI::class.java)
     }
 
-    single<CryptoDownload> {
-        //since we defined retrofit above, this repository will asks for retrofit and we can simply
-        //say get() in order to inject it even here
-        CryptoDownloadImpl(get())
+    @Singleton
+    @Provides
+    fun injectCryptoRepo(cryptoAPI: CryptoAPI) = CryptoDownloadImpl(cryptoAPI) as CryptoDownload
 
-        //since we are injecting the abstraction, we should explicitly state the
-        //implementation and abstraction here
-    }
 
-    viewModel{
-        //since we defined repo above, we can call get() here as well
-        CryptoViewModel(get())
-    }
-
-    //creates a factory, everytime we inject a new instance is created.
-    factory {
-
-    }
 }
+
