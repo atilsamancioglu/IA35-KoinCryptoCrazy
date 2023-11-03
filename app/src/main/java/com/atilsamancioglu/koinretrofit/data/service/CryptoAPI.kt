@@ -1,6 +1,6 @@
-package com.atilsamancioglu.koinretrofit.service
+package com.atilsamancioglu.koinretrofit.data.service
 
-import com.atilsamancioglu.koinretrofit.model.CryptoModel
+import com.atilsamancioglu.koinretrofit.domain.model.CryptoModel
 import retrofit2.Response
 import retrofit2.http.GET
 

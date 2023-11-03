@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.atilsamancioglu.koinretrofit.view.ListFragment"
+        android:name="com.atilsamancioglu.koinretrofit.presentation.view.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" />
 </navigation>

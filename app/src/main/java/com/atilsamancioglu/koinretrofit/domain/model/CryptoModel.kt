@@ -1,4 +1,4 @@
-package com.atilsamancioglu.koinretrofit.model
+package com.atilsamancioglu.koinretrofit.domain.model
 
 data class CryptoModel(
     val currency: String,

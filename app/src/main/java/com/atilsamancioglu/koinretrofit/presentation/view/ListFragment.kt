@@ -1,4 +1,4 @@
-package com.atilsamancioglu.koinretrofit.view
+package com.atilsamancioglu.koinretrofit.presentation.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,15 +12,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.atilsamancioglu.koinretrofit.databinding.FragmentListBinding
-import com.atilsamancioglu.koinretrofit.model.CryptoModel
-import com.atilsamancioglu.koinretrofit.service.CryptoAPI
-import com.atilsamancioglu.koinretrofit.viewmodel.CryptoViewModel
+import com.atilsamancioglu.koinretrofit.domain.model.CryptoModel
+import com.atilsamancioglu.koinretrofit.data.service.CryptoAPI
+import com.atilsamancioglu.koinretrofit.presentation.viewmodel.CryptoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 @AndroidEntryPoint
-class ListFragment : Fragment(),RecyclerViewAdapter.Listener {
+class ListFragment : Fragment(), RecyclerViewAdapter.Listener {
 
     private var _binding: FragmentListBinding? = null
     private val binding get()= _binding!!

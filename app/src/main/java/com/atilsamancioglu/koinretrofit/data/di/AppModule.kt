@@ -1,8 +1,8 @@
-package com.atilsamancioglu.koinretrofit.di
+package com.atilsamancioglu.koinretrofit.data.di
 
-import com.atilsamancioglu.koinretrofit.repository.CryptoDownload
-import com.atilsamancioglu.koinretrofit.repository.CryptoDownloadImpl
-import com.atilsamancioglu.koinretrofit.service.CryptoAPI
+import com.atilsamancioglu.koinretrofit.domain.repository.CryptoDownload
+import com.atilsamancioglu.koinretrofit.data.repository.CryptoDownloadImpl
+import com.atilsamancioglu.koinretrofit.data.service.CryptoAPI
 import com.atilsamancioglu.koinretrofit.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides

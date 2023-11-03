@@ -1,4 +1,4 @@
-package com.atilsamancioglu.koinretrofit.view
+package com.atilsamancioglu.koinretrofit.presentation.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

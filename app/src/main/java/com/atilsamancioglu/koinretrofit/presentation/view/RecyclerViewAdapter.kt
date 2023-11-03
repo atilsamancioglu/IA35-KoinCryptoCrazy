@@ -1,11 +1,11 @@
-package com.atilsamancioglu.koinretrofit.view
+package com.atilsamancioglu.koinretrofit.presentation.view
 
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.atilsamancioglu.koinretrofit.databinding.RecyclerRowBinding
-import com.atilsamancioglu.koinretrofit.model.CryptoModel
+import com.atilsamancioglu.koinretrofit.domain.model.CryptoModel
 
 class RecyclerViewAdapter(private val cryptoList : ArrayList<CryptoModel>, private val listener : Listener) : RecyclerView.Adapter<RecyclerViewAdapter.RowHolder>() {
 

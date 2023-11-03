@@ -1,21 +1,18 @@
-package com.atilsamancioglu.koinretrofit.viewmodel
+package com.atilsamancioglu.koinretrofit.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.atilsamancioglu.koinretrofit.model.CryptoModel
-import com.atilsamancioglu.koinretrofit.repository.CryptoDownload
-import com.atilsamancioglu.koinretrofit.service.CryptoAPI
+import com.atilsamancioglu.koinretrofit.domain.model.CryptoModel
+import com.atilsamancioglu.koinretrofit.domain.repository.CryptoDownload
+import com.atilsamancioglu.koinretrofit.domain.use_case.download_cryptos.DownloadCryptosUseCase
 import com.atilsamancioglu.koinretrofit.util.Resource
-import com.atilsamancioglu.koinretrofit.view.RecyclerViewAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 @HiltViewModel
 class CryptoViewModel @Inject constructor(
-     val cryptoDownloadRepository : CryptoDownload
+     val downloadCryptosUseCase: DownloadCryptosUseCase
 ) : ViewModel() {
 
     val cryptoList = MutableLiveData<Resource<List<CryptoModel>>>()
@@ -29,13 +26,11 @@ class CryptoViewModel @Inject constructor(
     }
 
 
-
-
     fun getDataFromAPI() {
         cryptoLoading.value = Resource.loading(true)
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
-            val resource = cryptoDownloadRepository.downloadCryptos()
+            val resource = downloadCryptosUseCase.executeDownloadCryptos()
             withContext(Dispatchers.Main) {
                 resource.data?.let {
                     cryptoLoading.value = Resource.loading(false)
