@@ -2,6 +2,7 @@ package com.atilsamancioglu.koinretrofit.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.atilsamancioglu.koinretrofit.domain.model.CryptoModel
 import com.atilsamancioglu.koinretrofit.domain.repository.CryptoDownload
 import com.atilsamancioglu.koinretrofit.domain.use_case.download_cryptos.DownloadCryptosUseCase
@@ -18,7 +19,7 @@ class CryptoViewModel @Inject constructor(
     val cryptoList = MutableLiveData<Resource<List<CryptoModel>>>()
     val cryptoError = MutableLiveData<Resource<Boolean>>()
     val cryptoLoading = MutableLiveData<Resource<Boolean>>()
-    private var job : Job? = null
+
 
     val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         println("Error: ${throwable.localizedMessage}")
@@ -29,7 +30,7 @@ class CryptoViewModel @Inject constructor(
     fun getDataFromAPI() {
         cryptoLoading.value = Resource.loading(true)
 
-        job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             val resource = downloadCryptosUseCase.executeDownloadCryptos()
             withContext(Dispatchers.Main) {
                 resource.data?.let {
@@ -70,7 +71,7 @@ class CryptoViewModel @Inject constructor(
 
     override fun onCleared() {
         super.onCleared()
-        job?.cancel()
+
     }
 }
 

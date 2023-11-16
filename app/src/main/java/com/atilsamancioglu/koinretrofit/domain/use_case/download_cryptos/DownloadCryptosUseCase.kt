@@ -1,15 +1,16 @@
 package com.atilsamancioglu.koinretrofit.domain.use_case.download_cryptos
 
+import com.atilsamancioglu.koinretrofit.data.service.CryptoAPI
 import com.atilsamancioglu.koinretrofit.domain.model.CryptoModel
 import com.atilsamancioglu.koinretrofit.domain.repository.CryptoDownload
 import com.atilsamancioglu.koinretrofit.util.Resource
 import javax.inject.Inject
 
-class DownloadCryptosUseCase @Inject constructor(private val repository: CryptoDownload) {
+class DownloadCryptosUseCase @Inject constructor(private val api: CryptoAPI) {
 
     //Use case -> only one major public function, one feature, single responsibility
     suspend fun executeDownloadCryptos() : Resource<List<CryptoModel>> {
-        val response = repository.downloadCryptos()
+        val response = api.getData()
         return try {
             if (response.isSuccessful) {
                 response.body()?.let {

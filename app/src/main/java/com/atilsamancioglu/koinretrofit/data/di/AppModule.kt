@@ -3,6 +3,7 @@ package com.atilsamancioglu.koinretrofit.data.di
 import com.atilsamancioglu.koinretrofit.domain.repository.CryptoDownload
 import com.atilsamancioglu.koinretrofit.data.repository.CryptoDownloadImpl
 import com.atilsamancioglu.koinretrofit.data.service.CryptoAPI
+import com.atilsamancioglu.koinretrofit.domain.use_case.download_cryptos.DownloadCryptosUseCase
 import com.atilsamancioglu.koinretrofit.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -26,7 +27,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun injectCryptoRepo(cryptoAPI: CryptoAPI) = CryptoDownloadImpl(cryptoAPI) as CryptoDownload
+    fun injectCryptoRepo(cryptosUseCase: DownloadCryptosUseCase) = CryptoDownloadImpl(cryptosUseCase) as CryptoDownload
 
 
 }

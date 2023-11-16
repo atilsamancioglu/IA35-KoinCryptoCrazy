@@ -5,5 +5,5 @@ import com.atilsamancioglu.koinretrofit.util.Resource
 import retrofit2.Response
 
 interface CryptoDownload {
-    suspend fun downloadCryptos() : Response<List<CryptoModel>>
+    suspend fun downloadCryptos() : Resource<List<CryptoModel>>
 }
